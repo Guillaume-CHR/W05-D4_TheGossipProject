@@ -12,12 +12,12 @@ Rails.application.routes.draw do
 	get '/gossips/:gossip_id', to: 'gossips#show'
 	get '/gossips/:gossip_id/edit', to: 'gossips#edit'
 	get '/gossips/new', to: 'gossips#new'
-	get '/gossips/new', to: 'gossips#destroy'
+	get '/gossips/destroy', to: 'gossips#destroy'
 
 	#User
 	get '/users/:user_id', to: 'users#show'
-	get '/users/:gossip_id/edit', to: 'users#edit'
+	get '/users/:user_id/edit', to: 'users#edit'
 	get '/users/new', to: 'users#new'
-	get '/users/new', to: 'users#destroy'
+	get '/users/destroy', to: 'users#destroy'
 
 end
