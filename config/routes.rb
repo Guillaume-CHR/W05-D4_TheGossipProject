@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'users/show'
+  get 'users/create'
+  get 'users/edit'
+  get 'users/destroy'
 	#Home Page: Identification > Customized Home Page
 	root 'homes#index'
 	get '/welcome/:text', to: 'homes#welcome'

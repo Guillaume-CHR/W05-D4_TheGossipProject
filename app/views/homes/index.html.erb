@@ -18,10 +18,10 @@
 		              	<br/>
 
 		              	<li class="text-right"> <h6>Author: <%= User.find(gossip.user_id).first_name + ' ' + User.find(gossip.user_id).last_name.upcase%></h6></li>
-		              	<li class="text-right"> <h6> <%= link_to "Visit Profile", controller: "users", action: "show", id: gossip.user_id %></h6></li>
+		              	<li class="text-right"> <h6> <%= link_to "Visit Profile", controller: "users", action: "show", user_id: gossip.user_id %></h6></li>
 		            </ul>
 		            	<button type="button" class="btn btn-lg btn-block">
-		            		<%= link_to "View more", controller: "gossips", action: "show", id: gossip %>
+		            		<%= link_to "View more", controller: "gossips", action: "show", gossip_id: gossip %>
 		            	</button>
 		          	</div>
 		        </div>
