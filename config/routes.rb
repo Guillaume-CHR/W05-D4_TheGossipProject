@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'users/show'
-  get 'users/create'
-  get 'users/edit'
-  get 'users/destroy'
 	#Home Page: Identification > Customized Home Page
 	root 'homes#index'
 	get '/welcome/:text', to: 'homes#welcome'
@@ -13,15 +9,17 @@ Rails.application.routes.draw do
 	get '/contact', to: 'homes#contact'
 
 	#Gossips
-	get '/gossips/:gossip_id', to: 'gossips#show'
-	get '/gossips/:gossip_id/edit', to: 'gossips#edit'
-	get '/gossips/new', to: 'gossips#new'
-	get '/gossips/destroy', to: 'gossips#destroy'
+	resources :gossips, only: [:show, :create, :edit, :destroy]
+	# get '/gossips/:gossip_id', to: 'gossips#show'
+	# get '/gossips/:gossip_id/edit', to: 'gossips#edit'
+	# get '/gossips/new', to: 'gossips#new'
+	# get '/gossips/destroy', to: 'gossips#destroy'
 
 	#User
-	get '/users/:user_id', to: 'users#show'
-	get '/users/:user_id/edit', to: 'users#edit'
-	get '/users/new', to: 'users#new'
-	get '/users/destroy', to: 'users#destroy'
+	resources :users, only: [:show, :create, :edit, :destroy]
+	# get '/users/:user_id', to: 'users#show'
+	# get '/users/:user_id/edit', to: 'users#edit'
+	# get '/users/new', to: 'users#new'
+	# get '/users/destroy', to: 'users#destroy'
 
 end
