@@ -1,20 +1,19 @@
+require 'time'
 class HomesController < ApplicationController
   def welcome
   	@text = params[:welcome]
   end
 
   def index
-  	puts "v"*100
-  	puts @gossip.inspect
-  	puts @gossip
-  	puts "^"*100
-  	
-  	@gossip = nil
-
-  	puts "v"*100
-  	puts @gossip.inspect
-  	puts @gossip
-  	puts "^"*100
+    @gossip_created = nil
+    @gossip_updated = nil
+    (Gossip.all).each do |gossip|
+      if (gossip.created_at <= (Time.now + 1).utc) && (gossip.created_at >= (Time.now - 1).utc)
+        @gossip_created = gossip
+      elsif (gossip.updated_at <= (Time.now + 1).utc) && (gossip.updated_at >= (Time.now- 1).utc)
+        @gossip_updated = gossip
+      end
+    end
   end
 
   def team

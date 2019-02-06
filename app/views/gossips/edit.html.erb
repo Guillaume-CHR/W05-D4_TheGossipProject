@@ -1,2 +1,33 @@
-<h1>Gossips#edit</h1>
-<p>Find me in app/views/gossip/edit.html.erb</p>
+<% if @gossip.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Damn it gerl ... you failed ...</h4>
+      <p>The creation of the gossip has failed... read the below errors mate</p>
+      <hr>
+      <p class="mb-0">
+          <ul>
+          <% @gossip.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+          <% end %>
+          </ul>
+      </p>
+  </div>
+<% end %>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+	<h1 class="display-4">The Gossip Project</h1>
+	<p class="lead">Update here your gossip n° <%= @gossip.id %></p>
+</div>
+
+<div class="container">
+  <%= form_for @gossip do |f| %>
+    <%= f.label 'Gossip Title', class: 'card text-white bg-primary text-left w-100 lead mb-0 p-1'%>
+    <%= f.text_field :title, style: 'width:100%'%>
+    <br/> <br/>
+
+    <%= f.label 'Gossip Content', class: 'card text-white bg-primary text-left w-100 lead mb-0 p-1'%>
+    <%= f.text_field :content,  rows: "10", style: 'width:100%'%>
+    <br/> <br/>
+
+    <%= f.submit %>
+  <% end %>
+</div>

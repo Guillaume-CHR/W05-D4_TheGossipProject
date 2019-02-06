@@ -1,11 +1,29 @@
-<% if @gossip != nil %>
+<% if @gossip_created != nil %>
 	<div class="alert alert-success" role="alert">
-		<h4 class="alert-heading">Well done! <%= @gossip.id %></h4>
-	  	<p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+		<h4 class="alert-heading">Well done mate! </h4>
+	  	<p>Gossip n°<%= @gossip_created.id %> has been created</p>
 	  	<hr>
-	  	<p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+      	<p class="mb-0">
+          	<ul>
+              	<li>Gossip Title: <%= @gossip_created.title %></li>
+              	<li>Gossip Author: <%= User.find(@gossip_created.user_id).first_name + ' ' + User.find(@gossip_created.user_id).last_name.upcase %></li>
+          	</ul>
+      	</p>
+	</div>
+<% elsif @gossip_updated != nil %>
+	<div class="alert alert-success" role="alert">
+		<h4 class="alert-heading">Well done mate! </h4>
+	  	<p>Gossip n°<%= @gossip_updated.id %> has been updated</p>
+	  	<hr>
+      	<p class="mb-0">
+          	<ul>
+              	<li>Gossip Title: <%= @gossip_updated.title %></li>
+              	<li>Gossip Content: <%= @gossip_updated.content %></li>
+          	</ul>
+      	</p>
 	</div>
 <% end %>
+
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   	<h1 class="display-4">The Gossip Project</h1>
@@ -17,7 +35,7 @@
 	<br/><br/>
 
 	<div class="card p-3 text-center d-inline-block">
-    	<% (Gossip.all).each_with_index do |gossip, index| %>
+    	<% (Gossip.all.order(:id)).each_with_index do |gossip, index| %>
 	        <div class="card mb-1 pb-4 shadow-sm d-inline-block" style="width: 350px;">
 	          	<div class="card-header">
 	            	<h4 class="my-0 font-weight-normal">Gossip <%= gossip.id %>: <strong><%= gossip.title %></strong></h4>
@@ -30,7 +48,9 @@
 		              	<li class="text-right"> <h6>Author: <%= User.find(gossip.user_id).first_name + ' ' + User.find(gossip.user_id).last_name.upcase%></h6></li>
 		              	<li class="text-right"> <h6> <%= link_to "Visit Profile", controller: "users", action: "show", id: gossip.user_id %></h6></li>
 		            </ul>
-		            <%= link_to "View more", gossip_path(gossip.id) , class: "btn btn-lg btn-block btn-outline-primary"%>
+		            <%= link_to "View more", gossip_path(gossip.id), class: "btn btn-lg btn-block btn-outline-primary"%>
+
+		            <%= link_to "Edit", edit_gossip_path(gossip.id) , class: "btn btn-lg btn-block btn-outline-default"%>
 		        </div>
 	        </div>
 	    <% end %>
