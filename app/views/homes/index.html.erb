@@ -1,31 +1,38 @@
-<body>
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      	<h1 class="display-4">The Gossip Project</h1>
-      	<p class="lead">Dear visitor, welcome to our secret page. Go through, our gossips.</p>
-    </div>
-	
-	
-	<div class="container ">
-    	<div class="card p-3 text-center d-inline-block">
-	    	<% (Gossip.all).each_with_index do |gossip, index| %>
-		        <div class="card mb-1 pb-4 shadow-sm d-inline-block" style="width: 350px;">
-		          	<div class="card-header">
-		            	<h4 class="my-0 font-weight-normal">Gossip <%= gossip.id %>: <strong><%= gossip.title %></strong></h4>
-		          	</div>
-		          	<div class="card-body">
-		           	<ul class="list-unstyled mt-3 mb-4">
+<% if @gossip != nil %>
+	<div class="alert alert-success" role="alert">
+		<h4 class="alert-heading">Well done! <%= @gossip.id %></h4>
+	  	<p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+	  	<hr>
+	  	<p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+	</div>
+<% end %>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  	<h1 class="display-4">The Gossip Project</h1>
+  	<p class="lead">Dear visitor, welcome to our secret page. Go through, our gossips.</p>
+</div>
+
+<div class="container">
+	<%= link_to "Create a gossip", new_gossip_path, class: "btn btn-lg btn-block btn-warning w-100"%>
+	<br/><br/>
+
+	<div class="card p-3 text-center d-inline-block">
+    	<% (Gossip.all).each_with_index do |gossip, index| %>
+	        <div class="card mb-1 pb-4 shadow-sm d-inline-block" style="width: 350px;">
+	          	<div class="card-header">
+	            	<h4 class="my-0 font-weight-normal">Gossip <%= gossip.id %>: <strong><%= gossip.title %></strong></h4>
+	          	</div>
+	          	<div class="card-body">
+	           		<ul class="list-unstyled mt-3 mb-4">
 		              	<li class="text-justify"><%= gossip.content.slice(0..20) %>...</li>
 		              	<br/>
 
 		              	<li class="text-right"> <h6>Author: <%= User.find(gossip.user_id).first_name + ' ' + User.find(gossip.user_id).last_name.upcase%></h6></li>
 		              	<li class="text-right"> <h6> <%= link_to "Visit Profile", controller: "users", action: "show", id: gossip.user_id %></h6></li>
 		            </ul>
-		            	<button type="button" class="btn btn-lg btn-block">
-		            		<%= link_to "View more", controller: "gossips", action: "show", id: gossip.id %>
-		            	</button>
-		          	</div>
+		            <%= link_to "View more", gossip_path(gossip.id) , class: "btn btn-lg btn-block btn-outline-primary"%>
 		        </div>
-		    <% end %>
-    	</div>
-	</div>	
-</body>
+	        </div>
+	    <% end %>
+	</div>
+</div>	

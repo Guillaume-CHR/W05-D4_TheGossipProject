@@ -5,9 +5,6 @@ class User < ApplicationRecord
   has_many :likes
   has_many :comments
   has_many :gossips
-	validates :first_name, presence: true
-	validates :last_name, presence: true
-	validates :description, 
-		presence: true,
-		length: { minimum: 3 }
+  validates :first_name, :last_name, :description, presence: { message: "You need to fill all the fields!" }
+	validates :description,	length: { minimum: 3 }
 end

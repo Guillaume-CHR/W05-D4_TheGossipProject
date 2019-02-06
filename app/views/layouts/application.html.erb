@@ -7,6 +7,12 @@
       <meta charset="utf-8" />                        <!-- ALl special chars -->
       <link href="goo.gl/361Vei" rel="stylesheet" type="text/css">      <!-- CSS File from BootStrap-->
       <link href="https://bootswatch.com/4/superhero/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
       
       <link rel="icon" href="favicon.png" />                  <!-- Small icon in tab -->
       <title>TheGossipProject</title>
