@@ -5,9 +5,6 @@ class GossipsController < ApplicationController
 
   def edit
     @gossip = Gossip.find(params[:id])
-    puts "v" *80
-    puts @gossip
-    puts "^"*80
   end
 
   def update

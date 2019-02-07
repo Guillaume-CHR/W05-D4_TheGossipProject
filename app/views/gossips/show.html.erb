@@ -22,7 +22,7 @@
 		              	<br/>
 		              	<li class="text-left">
 		              		<strong>Likes:</strong>
-		              			<%= Like.where(likeable: @gossip).count %> 
+		              			<%= Like.where(likeable: @gossip).count %>
 		              		<br/>
 		              		<strong>Tags:</strong>
 		              			<%  JoinGossipTag.where(gossip_id: @gossip.id).each do |tag| %>

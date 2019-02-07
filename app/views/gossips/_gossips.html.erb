@@ -1,0 +1,36 @@
+<% ((tbl_gossip.all.size)/3 + 1).times do %>
+	<div class="card-deck">
+		<% (tbl_gossip.all.order(:id)[i..i+2]).each_with_index do |gossip, index| %>
+  			<div class="card mt-4 shadow-sm">
+    			<!-- <img class="card-img-top" src="https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2015/04/gossip-730x344.jpg" alt="Card image cap"> -->
+    			<div class="card-header bg-defaut">
+    				<h4 class="my-0 font-weight-normal">Gossip <%= gossip.id %>: <strong><%= gossip.title %></strong></h4>
+  				</div>
+    			<div class="card-body">
+	           		<ul class="list-unstyled mt-3 mb-4">
+		              	<li class="text-justify"><%= gossip.content.slice(0..20) %>...</li>
+		              	Comments: <%=Comment.where(commentable: gossip).size%>
+		              	<br/>
+		              	Likes: <%=Like.where(likeable: gossip).count%>
+		              	<br/>
+
+		              	<li class="text-right">
+		              		<h6>Author: <strong><%= link_to (User.find(gossip.user_id).first_name + ' ' + User.find(gossip.user_id).last_name.upcase), user_path(gossip.user_id) %></strong></h6>
+		              	</li>
+		            </ul>
+		            
+		            <div class="text-center">
+		            	<%= link_to "Edit", edit_gossip_path(gossip.id) , class: "btn btn-lg btn-outline-default"%>
+		            	<%= link_to "Delete", gossip_path(gossip.id), class: "btn btn-lg text-danger  btn-outline-default", data: {confirm: "Are you sure?"}, method: :delete%>
+		            </div>
+		          	<%= link_to "View more", gossip_path(gossip.id), class: "btn btn-lg btn-block btn-outline-primary"%>
+
+    			</div>
+    			<div class="card-footer">
+					<small class="text-muted">Last updated on: <%= gossip.updated_at %></small>
+				</div>
+  			</div>
+		<%end%>
+		<% i += 3 %>
+	</div>
+<%end%>	
