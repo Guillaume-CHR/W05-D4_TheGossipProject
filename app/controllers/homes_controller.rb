@@ -5,6 +5,8 @@ class HomesController < ApplicationController
   end
 
   def index
+    @i = 0
+    
     @gossip_created = nil
     @gossip_updated = nil
     (Gossip.all).each do |gossip|

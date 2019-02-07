@@ -13,21 +13,45 @@
 		           	<ul class="list-unstyled mt-3 mb-4">
 		           		<li class="text-left">
 		           			<h7>Creation Date: <%= @gossip.created_at %></h7>
+		           			<h7>Updated on: <%= @gossip.updated_at %></h7>
 		           		</li>
 		           		<br/>
 		              	<li class="text-justify">
 		              		<%= @gossip.content %>
 		              	</li>
 		              	<br/>
+		              	<li class="text-left">
+		              		<strong>Likes:</strong>
+		              			<%= Like.where(likeable: @gossip).count %> 
+		              		<br/>
+		              		<strong>Tags:</strong>
+		              			<%  JoinGossipTag.where(gossip_id: @gossip.id).each do |tag| %>
+		              				#<%=Tag.find(tag.tag_id).title %> 
+		              			<% end %>
+		              	</li>
+		              	<br/>
 	
 		              	<li class="text-right">
-		              		<h6>Author: <%= User.find(@gossip.user_id).first_name + ' ' + User.find(@gossip.user_id).last_name.upcase%></h6>
-		              	</li>
-		              	<li class="text-right">
-		              		<h6> <%= link_to "Visit Profile", controller: "users", action: "show", id: @gossip.user_id %></h6>
+		              		Author: <%= link_to (User.find(@gossip.user_id).first_name + ' ' + User.find(@gossip.user_id).last_name.upcase), user_path(@gossip.user_id) %>
+		              		<blockquote>From: <%= link_to City.find(User.find(@gossip.user_id).city_id).name, city_path(@gossip.user_id) %></blockquote>
 		              	</li>
 		            </ul>
 	          	</div>
+	          	<div class="card-footer">
+	          		<% if Comment.where(commentable: @gossip).size == 0 %>
+						No comment yet...
+	          		<% else %>
+						<% Comment.where(commentable: @gossip).each do |comment| %>
+							Comment title: <%= comment.title %>
+							<br/>
+							Comment content: <%= comment.content %>
+							<br/>
+							Comment user: <%= link_to (User.find(comment.user_id).first_name + ' ' + User.find(comment.user_id).last_name.upcase), user_path(comment.user_id) %>
+							<br/>
+							<br/>
+						<% end %>
+					<% end %>
+				</div>
 	        </div>
     	</div>
 	</div>

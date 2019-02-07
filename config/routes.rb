@@ -13,4 +13,7 @@ Rails.application.routes.draw do
 
 	#User
 	resources :users, only: [:show, :new, :create, :edit, :destroy, :update]
+
+	#Cities
+	resources :cities, only: [:show, :new, :create, :edit, :destroy, :update]
 end
