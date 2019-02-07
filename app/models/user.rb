@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :likes
   has_many :comments
   has_many :gossips
+  validates :email, uniqueness: {message: "This email already exists"}
   validates :first_name, :last_name, :description, presence: { message: "You need to fill all the fields!" }
 	validates :description,	length: { minimum: 3 }
 end
